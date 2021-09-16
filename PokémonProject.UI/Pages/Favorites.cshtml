@@ -1,0 +1,27 @@
+﻿@page
+@model PokémonProject.UI.Pages.FavoritesModel
+@{
+}
+<h1 class="justify-content-center" style="font-size: 32px; color: #FFD523">Favorites</h1>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.PokemonFavorites)
+        {
+        <div class="col-3 pt-2 mt-2">
+            <img src="/Pokemon images/@item.Image" class="card-img-top" alt="...">
+            <div class="card" style="width: 14rem; color: #FFD523; background-color: #393b4e;">
+                <div class="card-header" style="font-size:24px;">
+                    @item.Name.ToUpper()
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="font-size: 20px; color: white; background-color: #393b4e;">Height: @item.Height</li>
+                    <li class="list-group-item" style="font-size: 20px; color: white; background-color: #393b4e;">Weight: @item.Weight</li>
+                </ul>
+            </div>
+            <form method="post">
+                <input class="btn btn-outline-light" style="text-align: center; width: 225px; background-color: #393b4e;" asp-route-name="@item.Name" type="submit" value="Remove" />
+            </form>
+        </div>
+        }
+    </div>
+</div>

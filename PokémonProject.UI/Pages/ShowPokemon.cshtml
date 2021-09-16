@@ -1,0 +1,44 @@
+﻿@page
+@model PokémonProject.UI.Pages.ShowPokemonModel
+@{
+}
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.pokemonList)
+        {
+            <div class="col-3 pt-2 mt-2">
+                <img src="/Pokemon images/@item.Image" class="card-img-top" alt="...">
+                <div class="card" style="width: 14rem; color: #FFD523; background-color: #393b4e;">
+                    @if (item.Favorite)
+                    {
+                        <div class="card-header" style="font-size:24px;">
+                            @item.Name.ToUpper() *
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card-header" style="font-size:24px;">
+                            @item.Name.ToUpper()
+                        </div>
+                    }
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" style="font-size: 20px; color: white; background-color: #393b4e;">Height: @item.Height</li>
+                        <li class="list-group-item" style="font-size: 20px; color: white; background-color: #393b4e;">Weight: @item.Weight</li>
+                    </ul>
+                    <ul class="mt-1 pt-1">
+                        @foreach (var move in item.Moves.Take(3))
+                        {
+                            <li class="text-light">@move.Move.Name.ToUpper()</li>
+                        }
+                    </ul>
+                </div>
+                @if (!item.Favorite)
+                {
+                    <form method="post">
+                        <input class="btn btn-outline-light justify-content-center text-center" style="justify-content: center; width: 225px; background-color: #393b4e;" asp-route-name="@item.Name" type="submit" value="Add to Favorites" />
+                    </form>
+                }
+            </div>
+        }
+    </div>
+</div>
